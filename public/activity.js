@@ -1,13 +1,21 @@
 var connection = new Postmonger.Session();
 
-alert("Hi from Satya!");
-
 // Startup Sequence
 connection.trigger('ready');
 
 connection.on('initActivity', function( data ) {
+  alert("Hi from Satya!");
+
   document.getElementById( 'configuration' ).value = JSON.stringify( data, null, 2 );
 });
+
+connection.on('requestedTriggerEventDefinition',
+    function(eventDefinitionModel) {
+      if (eventDefinitionModel) {
+        console.log({eventDefinitionModel});
+        eventDefinitionKey = eventDefinitionModel.eventDefinitionKey;
+      }
+    });
 
 // Save Sequence
 connection.on('clickedNext', function() {
