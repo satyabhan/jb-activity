@@ -4,26 +4,29 @@ var connection = new Postmonger.Session();
 connection.trigger('ready');
 connection.trigger('requestTokens');
 connection.trigger('requestTriggerEventDefinition');
+connection.trigger('requestSchema');
 
 connection.on('initActivity', function( data ) {
-  alert("initActivity");
-  console.log({data});
+  console.log('initActivity', {data});
   document.getElementById( 'configuration' ).value = JSON.stringify( data, null, 2 );
 });
 
 connection.on('requestedTriggerEventDefinition',
     function(eventDefinitionModel) {
-    alert("requestedTriggerEventDefinition");
       if (eventDefinitionModel) {
-        console.log({eventDefinitionModel});
+        console.log('requestedTriggerEventDefinition', {eventDefinitionModel});
         //eventDefinitionKey = eventDefinitionModel.eventDefinitionKey;
       }
     });
 
+connection.on('requestedSchema', function (data) {
+  console.log('requestedSchema', {data});
+});
+
 connection.on('requestedTokens',
     function onGetTokens (tokens) {
       // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
-      console.log({tokens});
+      console.log('requestedTokens', {tokens});
     });
 // Save Sequence
 connection.on('clickedNext', function() {
