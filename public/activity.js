@@ -1,5 +1,7 @@
 var connection = new Postmonger.Session();
 
+alert("Hi from Satya!");
+
 // Startup Sequence
 connection.trigger('ready');
 
