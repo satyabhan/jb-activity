@@ -8,6 +8,12 @@ connection.trigger('requestSchema');
 
 connection.on('initActivity', function( data ) {
   console.log('initActivity', {data});
+
+  var url = (window.location != window.parent.location)
+      ? document.referrer
+      : document.location.href;
+
+  console.log('parentUrl', url);
   document.getElementById( 'configuration' ).value = JSON.stringify( data, null, 2 );
 });
 
