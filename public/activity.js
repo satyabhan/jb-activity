@@ -5,6 +5,11 @@ connection.trigger('ready');
 connection.trigger('requestTokens');
 connection.trigger('requestTriggerEventDefinition');
 connection.trigger('requestSchema');
+connection.trigger('requestInteraction');
+
+connection.on('requestedInteraction', function onRequestedInteraction(settings) {
+    console.log('requestedInteraction', {settings});
+});
 
 connection.on('initActivity', function( data ) {
   console.log('initActivity', {data});
