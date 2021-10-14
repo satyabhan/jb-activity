@@ -1,5 +1,5 @@
-const axios = require("axios");
 var connection = new Postmonger.Session();
+const axios = require('axios').default;
 
 // Startup Sequence
 connection.trigger('ready');
