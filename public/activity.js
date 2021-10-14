@@ -1,3 +1,4 @@
+import axios from "axios";
 var connection = new Postmonger.Session();
 
 // Startup Sequence
@@ -10,6 +11,11 @@ connection.trigger('requestEndpoints');
 
 connection.on('requestedEndpoints', function onRequestedInteraction(endpoints) {
     console.log('requestedInteraction', {endpoints});
+    axios.get('https://jsonplaceholder.typicode.com/todos/1')
+        .then(response => {
+            console.log('jsonplaceholder', {response})
+        })
+        .catch(error => console.error('axios error', error))
 });
 
 connection.on('requestedInteraction', function onRequestedInteraction(settings) {
