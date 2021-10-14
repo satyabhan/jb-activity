@@ -6,6 +6,11 @@ connection.trigger('requestTokens');
 connection.trigger('requestTriggerEventDefinition');
 connection.trigger('requestSchema');
 connection.trigger('requestInteraction');
+connection.trigger('requestEndpoints');
+
+connection.on('requestedEndpoints', function onRequestedInteraction(endpoints) {
+    console.log('requestedInteraction', {endpoints});
+});
 
 connection.on('requestedInteraction', function onRequestedInteraction(settings) {
     console.log('requestedInteraction', {settings});
