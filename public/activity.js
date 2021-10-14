@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 var connection = new Postmonger.Session();
 
 // Startup Sequence
