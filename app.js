@@ -6,13 +6,11 @@ const axios = require('axios');
 app.get('/test', (req, res) => {
     axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
         .then(response => {
-            console.log(response.data.url);
-            console.log(response.data.explanation);
+            res.send(response)
         })
         .catch(error => {
-            console.log(error);
+            res.send(error);
         });
-    res.send('Hello World!')
 })
 
 app.use('/static', express.static('public') )
