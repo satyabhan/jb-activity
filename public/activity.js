@@ -1,4 +1,23 @@
-var connection = new Postmonger.Session();
+const connection = new Postmonger.Session();
+
+const _endpoints = new Promise((resolve, reject) => {
+    connection.on('requestedEndpoints', function onRequestedInteraction(endpoints) {
+        console.log('requestedEndpoints', {endpoints});
+        resolve(endpoints);
+    });
+});
+
+const _tokens = new Promise((resolve, reject) => {
+    connection.on('requestedTokens', function onGetTokens (tokens) {
+        // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
+        console.log('requestedTokens', {tokens});
+        resolve(tokens);
+    });
+})
+
+Promise.all([_endpoints, _tokens]).then((values) => {
+   console.log("promise", values);
+});
 
 // Startup Sequence
 connection.trigger('ready');
@@ -7,22 +26,6 @@ connection.trigger('requestTriggerEventDefinition');
 connection.trigger('requestSchema');
 connection.trigger('requestInteraction');
 connection.trigger('requestEndpoints');
-
-connection.on('requestedEndpoints', function onRequestedInteraction(endpoints) {
-    console.log('requestedInteraction', {endpoints});
-    var obj = {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YmPRSxDV8MKVwevwSUnNfchp'
-        },
-    }
-
-    fetch('https://www-mc-s11.exacttargetapis.com/platform/v1/tokenContext', obj)
-        .then(response => response.json())
-        .then(json => console.log("tokenContext", json))
-});
 
 connection.on('requestedInteraction', function onRequestedInteraction(settings) {
     console.log('requestedInteraction', {settings});
@@ -51,11 +54,6 @@ connection.on('requestedSchema', function (data) {
   console.log('requestedSchema', {data});
 });
 
-connection.on('requestedTokens',
-    function onGetTokens (tokens) {
-      // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
-      console.log('requestedTokens', {tokens});
-    });
 // Save Sequence
 connection.on('clickedNext', function() {
   var configuration = JSON.parse( document.getElementById( 'configuration' ).value );
