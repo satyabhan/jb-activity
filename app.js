@@ -6,5 +6,5 @@ app.get('/test', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use( express.static('public') )
+app.use('/static', express.static('public') )
 app.listen( port, () => console.log( `App listening on port ${port}!`) )
