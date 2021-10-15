@@ -10,10 +10,18 @@ connection.trigger('requestEndpoints');
 
 connection.on('requestedEndpoints', function onRequestedInteraction(endpoints) {
     console.log('requestedInteraction', {endpoints});
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-        .then(response => response.json())
-        .then(json => console.log(json))
+    var obj = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YmPRSxDV8MKVwevwSUnNfchp'
+        },
+    }
 
+    fetch('https://www-mc-s11.exacttargetapis.com/platform/v1/tokenContext', obj)
+        .then(response => response.json())
+        .then(json => console.log("tokenContext", json))
 });
 
 connection.on('requestedInteraction', function onRequestedInteraction(settings) {
