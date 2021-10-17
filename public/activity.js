@@ -26,7 +26,10 @@ Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
        body: JSON.stringify({'fuelapiRestHost': endpoints.fuelapiRestHost, 'fuel2token': tokens.fuel2token})
    })
        .then(response => {
-           console.log("getAttributes", response.json());
+           return response.json();
+       })
+       .then(attributes => {
+           console.log("getAttributes", attributes);
        })
 });
 
