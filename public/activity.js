@@ -17,7 +17,14 @@ const _tokens = new Promise((resolve, reject) => {
 
 Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
    console.log("promise", {endpoints, tokens});
-   fetch('../getAttributes')
+   fetch('../getAttributes', {
+       method: 'POST',
+       headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+       },
+       body: JSON.stringify({'fuelapiRestHost': endpoints.fuelapiRestHost, 'fuel2token': tokens.fuel2token})
+   })
        .then(response => {
            console.log("getAttributes", response.json());
        })
