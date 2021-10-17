@@ -17,6 +17,10 @@ const _tokens = new Promise((resolve, reject) => {
 
 Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
    console.log("promise", {endpoints, tokens});
+   fetch('../getAttributes')
+       .then(response => {
+           console.log("getAttributes", response.json());
+       })
 });
 
 // Startup Sequence
