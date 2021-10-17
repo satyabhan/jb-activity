@@ -31,6 +31,22 @@ Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
        .then(attributes => {
            console.log("getAttributes", attributes);
        })
+
+    fetch('../getTokenContext', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'fuelapiRestHost': endpoints.fuelapiRestHost, 'fuel2token': tokens.fuel2token})
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(context => {
+            console.log("tokenContext", context);
+        })
+
 });
 
 // Startup Sequence
