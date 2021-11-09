@@ -1,4 +1,3 @@
-// Authentication through JWT
 {
   "name": "",
   "id": null,
@@ -7,15 +6,45 @@
     "execute": {
       "inArguments": [
         { "contactKey": "{{Contact.Key}}" },
-        { "FirstName": "{{Contact.Attribute.JourneyEntrySource.FirstName}}"},
-        { "LastName": "{{Contact.Attribute.JourneyEntrySource.LastName}}"}
+        { "FirstName": "{{Contact.Attribute.ATTN_SUBSCRIBER_DATA.FIRST_NAME}}"},
+        { "LastName": "{{Contact.Attribute.ATTN_SUBSCRIBER_DATA.LAST_NAME}}"},
+        { "AttId": "{{Contact.Attribute.ATTN_SUBSCRIBER_DATA.ATTN_UNIQUE_ID}}"}
       ],
-      "url": "https://requestbin.fullcontact.com/r92a9gr9/execute"
+      "outArguments": [
+        { "MsgId": "" },
+        { "AttId": "" }
+      ],
+      "useJwt": true,
+      "customerKey": "thisIsATestKey",
+      "timeout": 10000,
+      "url": "https://ensedpq9u7lmpml.m.pipedream.net"
+    }
+  },
+  "schema": {
+    "arguments": {
+      "execute": {
+        "outArguments": [
+          {
+            "MsgId": {
+              "dataType": "Text",
+              "direction": "out",
+              "access": "visible",
+              "isNullable": false
+            },
+            "AttId": {
+              "dataType": "Text",
+              "direction": "out",
+              "access": "visible",
+              "isNullable": false
+            }
+          }
+        ]
+      }
     }
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://requestbin.fullcontact.com/r92a9gr9/publish"
+      "url": "https://ensedpq9u7lmpml.m.pipedream.net"
     }
   },
   "metaData": {
@@ -28,7 +57,7 @@
   "editable": true,
   "outcomes": [
     {
-      "next": "WAITBYDURATION-1"
+      "next": "MULTICRITERIADECISIONV2-1"
     }
   ],
   "errors": []

@@ -15,6 +15,18 @@ const _tokens = new Promise((resolve, reject) => {
     });
 })
 
+function auth(context)
+{
+    orgId = context.enterprise.id
+    fetch('https://salesforce-api.dev.attentivemobile.com/journey-builder/token?orgId=orgId' + orgId)
+        .then(response => {
+            return response.json();
+        })
+        .then(attributes => {
+            console.log("auth", attributes);
+        })
+}
+
 Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
    console.log("promise", {endpoints, tokens});
    fetch('../getAttributes', {
@@ -45,6 +57,7 @@ Promise.all([_endpoints, _tokens]).then(([endpoints, tokens]) => {
         })
         .then(context => {
             console.log("tokenContext", context);
+            auth(context);
         })
 
 });

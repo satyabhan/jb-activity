@@ -1,0 +1,36 @@
+{
+  "name": "",
+  "id": null,
+  "key": "REST-2",
+  "arguments": {
+    "execute": {
+      "inArguments": [
+        { "contactKey": "{{Contact.Key}}" },
+        { "path": "yes"}
+      ],
+      "url": "https://ensedpq9u7lmpml.m.pipedream.net"
+    }
+  },
+  "configurationArguments": {
+    "publish": {
+      "url": "https://ensedpq9u7lmpml.m.pipedream.net"
+    }
+  },
+  "metaData": {
+    "icon": "https://sample-activity.herokuapp.com/icon.png",
+    "category": "message",
+    "iconSmall": null,
+    "original_icon": "icon.png",
+    "isConfigured": true
+  },
+  "editable": true,
+  "outcomes": [
+    {
+      "next": "WAITBYDURATION-2",
+      "metaData": {
+        "invalid": false
+      }
+    }
+  ],
+  "errors": []
+}
