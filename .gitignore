@@ -1,2 +1,7 @@
 node_modules
 npm-debug.log
+package-lock.json
+.idea/checkstyle-idea.xml
+.idea/google-java-format.xml
+.idea/vcs.xml
+.idea/workspace.xml
